@@ -1,11 +1,10 @@
 //import
 const Contenedor = require("./contenedor.js")
-let productos = new Contenedor('productos')
 
 
 // Definicion de objeto y pruebas
 async function main(){
-    
+    let productos = new Contenedor('productos')    
     let contenido = await productos.getAll()
     console.log(`\nContenido del archivo\n------------------------------\n${JSON.stringify(contenido)}\n------------------------------\n`)
 
