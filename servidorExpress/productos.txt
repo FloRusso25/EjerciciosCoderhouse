@@ -1,0 +1,1 @@
+[{"title":"Escuadra","price":123.45,"thumbnail":"https://www.google.com/search?q=escuadra","id":1},{"title":"Calculadora","price":234.56,"thumbnail":"https://www.google.com/search?q=calculadora","id":2},{"title":"Globo terráqueo","price":5,"thumbnail":"https://www.google.com/search?q=globo+terraqueo","id":3}]
