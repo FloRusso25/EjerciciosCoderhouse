@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+</head>
+<body>
+
+    <h2>Obtener todos los productos</h2>
+    <form action="/api/productos" method="GET">
+        <button>Aceptar</button>
+    </form>
+
+
+    <br><hr>
+
+    <h2>Obtener producto por ID</h2>
+    <form action="/api/productos/:id" method="GET">
+        ID: <input type="text" name="id">
+        <button>Aceptar</button>
+    </form>
+
+    <br><hr>
+
+    <h2>Ingresar nuevo producto</h2>
+    <form action="/api/productos" method="POST">
+        Nombre: <input type="text" name="title">
+        Precio: <input type="text" name="price">
+        Imagen: <input type="text" name="thumbnail">
+        <button>Aceptar</button>
+    </form>
+
+    <br><hr>
+
+    <h2>Modificar producto</h2>
+    <form action="/api/productos/:id" method="PUT">
+        ID: <input type="text" name="id">
+        Nombre: <input type="text" name="title">
+        Precio: <input type="text" name="price">
+        Imagen: <input type="text" name="thumbnail">
+        <button>Aceptar</button>
+    </form>
+
+    <br><hr>
+
+    <h2>Eliminar producto</h2>
+    <form action="/api/productos/:id" method="DELETE">
+        ID: <input type="text" name="id">
+        <button>Aceptar</button>
+    </form>
+
+</body>
+</html>
