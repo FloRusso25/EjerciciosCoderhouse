@@ -1,0 +1,26 @@
+<div>
+    <h2>Producto agregado</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+        </tr>
+        {{#each postData}}
+            <tr>
+                <td>{{this.title}}</td>
+                <td>{{this.price}}</td>
+                <td><img src={{this.thumbnail}} alt={{this.thumbnail}}></td>
+            </tr>
+        {{/each}}
+        
+    </table>
+</div>
+
+<br><hr>
+
+<div>
+    <form action= "/productos" method="GET">
+        <button>Get</button>
+    </form>
+</div>

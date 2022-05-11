@@ -1,0 +1,26 @@
+<h2>Vista de productos</h2>
+
+{{#unless getData.length}}
+    <h3>No se encontraron productos</h3>
+{{else}}
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</th>
+        </tr>
+        {{#each getData}}
+            <tr>
+                <td>{{this.title}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.thumbnail}}</td>
+            </tr>
+        {{/each}}   
+    </table>
+{{/unless}}
+
+<br><hr>
+
+<form action="/productos" method="POST">
+    <button>Post</button>
+</form>

@@ -1,0 +1,21 @@
+div
+  h2 Producto agregado
+    table
+      tbody
+        tr
+          th Nombre
+          th Precio
+          th Imagen
+        each item in postData
+          tr
+            td= item.title
+            td= item.price
+            td
+              img(src= item.thumbnail alt=item.thumbnail)
+
+br
+hr
+
+div
+  form(action='/productos' method='GET')
+    button Get
