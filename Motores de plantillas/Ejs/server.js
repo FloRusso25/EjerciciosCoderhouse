@@ -3,9 +3,9 @@ const Contenedor = require("./contenedor.js")
 const productos = new Contenedor('productos') 
 
 //Carga de tres productos en memoria
-productos.save({title: "escuadra", price: 5.65, thumbnail: "www.escuadra.com"})
-productos.save({title: "tijera", price: 3, thumbnail: "www.tijera.com"})
-productos.save({title: "regla", price: 2.5, thumbnail: "www.regla.com"})
+// productos.save({title: "escuadra", price: 5.65, thumbnail: "www.escuadra.com"})
+// productos.save({title: "tijera", price: 3, thumbnail: "www.tijera.com"})
+// productos.save({title: "regla", price: 2.5, thumbnail: "www.regla.com"})
 
 //import express y definiciones
 const express = require('express')
@@ -16,16 +16,15 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-//handlebars
-app.engine('handlebars', handlebars.engine())
-app.set('views', './views')
-app.set('view engine', 'handlebars')
 
 const router = new Router()
 
 const PORT = 8080
 
-const errorObject = {error: 'Producto no encontrado'}
+//handlebars
+app.set('views', './views')
+app.set('view engine', 'ejs')
+
 
 
 //instancia de servidor y uso de funciones con express
@@ -35,17 +34,20 @@ const server = app.listen(PORT, () => {
 server.on("error", error => console.log(`Error en servidor ${error}`))
 
 //llamadas
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
+    res.render('pages/index', { getStatus: false, postStatus: false } )
+})
+app.get('/productos', (req, res) => {
+    const data = productos.getAll()
     console.log("GET todos los productos")
-    res.json(productos.getAll())
+    console.log(data)
+    res.render('pages/get', { getData: data})
 })
 
-router.post('/', (req, res) => { 
+app.post('/productos', (req, res) => { 
     console.log(`POST producto ${req.body}`)
 
-    newProductId = productos.save(req.body)
-    res.json(productos.getById(newProductId))
+    let newProductId = productos.save(req.body)
+    const data = productos.getById(newProductId)
+    res.render('pages/post', {postData: data})
 })
-
-
-app.use('/productos', router)
