@@ -37,8 +37,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     console.log(`GET un producto por id ${req.params.id}`)
 
-    const  { id }  =  req.params.id 
-
+    const  id  =  req.params.id 
+    console.log(`GET id ${id}`)
     let producto = productos.getById(Number(id))
     
     res.json( (producto != null ? producto : errorObject))
