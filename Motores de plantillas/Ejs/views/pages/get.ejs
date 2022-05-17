@@ -1,0 +1,34 @@
+<h2>Vista de productos</h2>
+
+<% if(getData.length){ %>
+  <table>
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Foto</th>
+    </tr>
+    
+    <% for (var index=0; index < getData.length; index++) { %>
+      <tr>
+        <td> <%= getData[index].title %></td>
+        <td><%= getData[index].price %></td>
+        <td><img src= <%= getData[index].thumbnail %> alt= <%= getData[index].thumbnail %> ></td>
+      </tr>
+    <% } %>
+    
+        
+       
+  </table>
+<% } else{ %>  
+  <h3>No se encontraron productos</h3>
+<% } %>
+
+
+    
+
+
+<br><hr>
+
+<form action="/" method="GET">
+    <button>Post</button>
+</form>

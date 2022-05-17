@@ -1,0 +1,10 @@
+De los tres motores elijiría Handlebars (aunque estoy entre Handlebars y Ejs dependiendo de cada situación). 
+
+Considero que Pug es el más sencillo de los tres motores, sobre todo para usuarios que no tengan experiencia en HTML. Es más simple e intuitivo para escribir código HTML. 
+La sintaxis para codigo no HTML también es bastante sencilla.
+
+Con Handlebars se puede meter lógica de una forma similar a pug, encerrandola entre llaves. Mantiene una forma simple en la sintaxis de las operaciones, como las sentencias if y for, aunque no es tan sencillo modificar las condiciones a evaluar. Por ejemplo, cambiar la condicion a evaluar en true para un if no es tan simple como en los otros dos motores.
+Además, mantiene la sintaxis de HTML. Una ventaja sobre Pug para aquellos usuarios que ya manejan el lenguaje. 
+
+Ejs mantiene, como Handlebars, la sintaxis de HTML. Pero la sintaxis para introducir decisiones y lógica me pareció bastante más compleja, por los simbolos utilizados y por ejemplo, por la imposibilidad de implementar un for in en lugar de la sintaxis clasica de for (for (item, condicion, item++){})
+
