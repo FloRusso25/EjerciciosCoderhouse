@@ -10,7 +10,7 @@ tiempo real.
 los cambios que se realicen en los productos sin necesidad de recargar la vista.
 - Cuando un cliente se conecte, recibirá la lista de productos a representar en la vista.
 
-### **Aspectos a incluir en el entregable** 
+### **Aspectos a incluir en el entregable**
 
 Para construir la tabla dinámica con los datos recibidos por websocket utilizar Handlebars en el
 frontend. Considerar usar archivos públicos para alojar la plantilla vacía, y obtenerla usando la

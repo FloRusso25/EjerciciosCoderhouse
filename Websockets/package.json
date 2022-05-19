@@ -1,0 +1,13 @@
+{
+  "name": "websockets",
+  "version": "1.0.0",
+  "description": "Modificar el último entregable para que disponga de un canal de websocket que\r permita representar, por debajo del formulario de ingreso, una tabla con la lista de productos en\r tiempo real.",
+  "main": "contenedor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

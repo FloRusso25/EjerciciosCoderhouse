@@ -1,0 +1,16 @@
+<div>
+    <h2>Centro de mensajes</h2>
+    <form onsubmit="return addMessage(this)">
+      Email: <input type="text" id="email" placeholder="usuario@correoElectronico.com">
+      Mensaje: <input type="text" id="mensaje" placeholder="Ingresa un mensaje">
+
+      <input type="submit" value="Enviar">
+    </form>
+</div>
+
+<br>
+
+<div id="messages">
+</div>
+<script src="/socket.io/socket.io.js"></script>    
+<script src="chat.js"></script>
