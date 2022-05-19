@@ -1,11 +1,16 @@
 <div>
     <h2>Centro de mensajes</h2>
-    <form onsubmit="return addMessage(this)">
+    <form id="mensajesForm" onsubmit="return addMessage(this)">
       Email: <input type="text" id="email" placeholder="usuario@correoElectronico.com">
       Mensaje: <input type="text" id="mensaje" placeholder="Ingresa un mensaje">
 
       <input type="submit" value="Enviar">
     </form>
+    <script>
+      document.getElementById("mensajesForm").addEventListener("submit",(e)=>{
+        e.preventDefault();
+      });
+  </script>
 </div>
 
 <br>

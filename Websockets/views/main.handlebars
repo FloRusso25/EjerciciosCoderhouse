@@ -1,5 +1,3 @@
-
-
 <h2>Ingrese producto</h2>
   <form onsubmit="return addProduct(this)">
     Nombre: <input type="text" id="nombre">
@@ -7,32 +5,34 @@
     Imagen: <input type="text" id="foto">
     <input type="submit" value="Enviar">
   </form>
-  <script>
+  {{!-- <script>
     form.addEventListener("submit",(e)=>{
       e.preventDefault();
-      //Rest of the code
     });
-  </script>
-
-  <div id="nuevoProducto">
-
-  </div>
-  <script src="/socket.io/socket.io.js"></script>    
-  <script src="tablaProductos.js"></script>
-
-  <br><hr>
-
-{{!-- {{#unless postStatus}} 
-  <h2>Listar todos los productos</h2>
-    <form action="/productos" method="GET">
-      <button>Aceptar</button>
-    </form>
-
-  <br><hr>
-{{/unless}}  --}}
-
-{{> listaProductos}}
+  </script> --}}
 
 <br><hr>
+
+<div>
+  <h2>Producto agregado</h2>
+  <table>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Imagen</th>
+      </tr>
+      <tr id="listaProductos">
+
+      </tr>
+      <script src="/socket.io/socket.io.js"></script>    
+      <script src="tablaProductos.js"></script>
+
+  </table>
+</div>
+
+  <br><hr>
+
+{{!-- {{> listaProductos}} --}}
+
   
 {{> centroMensajes}}

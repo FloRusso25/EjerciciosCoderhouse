@@ -67,37 +67,17 @@ io.on('connection', (socket) => {
     console.log("Nuevo usuario conectado")
     
     socket.emit('messages', messages)
+    socket.emit('listaProductos', listaProductos)
 
     socket.on('new-message', dataMensajes => {
         messages.push(dataMensajes)
 
         io.sockets.emit('messages', messages)
     })
-})
 
-io.on('connection', (socketProductos) => {
-
-    console.log("Nuevo producto agregado")
-
-    socketProductos.emit('listaProductos', listaProductos)
-    
-    socketProductos.on('new-product', dataProducto => {
+    socket.on('new-product', dataProducto => {
         listaProductos.push(dataProducto)
 
-        io.emit('listaProductos', listaProductos)
+        io.sockets.emit('listaProductos', listaProductos)
     })
 })
-
-// io.on('connection', (socket, socketProductos) => {
-
-//     console.log("Nuevo usuario conectado")
-    
-//     socket.emit('messages', messages)
-//     socketProductos.emit('listaProductos', listaProductos)
-
-//     socket.on('new-message', dataMensajes => {
-//         messages.push(dataMensajes)
-
-//         io.sockets.emit('messages', messages)
-//     })
-// })
