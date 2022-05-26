@@ -1,0 +1,1 @@
+[{"nombre":"Escuadra","precio":123.45,"foto":"https://www.google.com/search?q=escuadra","id":1},{"nombre":"Calculadora","precio":234.56,"foto":"https://www.google.com/search?q=calculadora","id":2},{"nombre":"nuevo","precio":4,"foto":"www.tijera.com","descripcion":"una tijera para cortar","codigo":2747,"stock":20,"timestamp":1653528536871,"id":4}]
