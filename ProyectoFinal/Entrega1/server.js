@@ -120,14 +120,25 @@ routerCarrito.post('/', async (req, res) => {
 
 routerCarrito.post('/:id/productos', async (req, res) => {
     const idCarrito = req.params.id
+    const productosCarrito = req.body.productos
+    let listaProductos = []
+
     console.log(`POST productos en carrito ${idCarrito}`)
 
-    let carritoId = await carrito.getById(Number(id))
+    let carritoId = await carrito.getById(Number(idCarrito))
 
-    if (carritoId != null)
-
-    newCarritoId = await carrito.save(req.body)
-    res.json(await carrito.getById(newCarritoId))
+    if (carritoId != null) {
+        for (let producto in productosCarrito) {
+            producto = await productos.getById(Number(producto))
+            if (producto != null) {
+                listaProductos.push(producto)
+            }
+        }
+        res.json(await carrito.updateById({productos: listaProductos}, idCarrito))
+    }
+    else {
+        res.json(errorCarrito)
+    }    
 })
 
 routerCarrito.delete('/:id', (req, res) => {
@@ -138,7 +149,31 @@ routerCarrito.delete('/:id', (req, res) => {
     res.json(carrito.deleteById(Number(id)))
 })
 
-routerCarrito.delete('/:id/productos', (req, res) => {
+routerCarrito.delete('/:id/productos/:id_prod', async (req, res) => {
+
+    const idCarrito = req.params.id
+    const idProducto = req.params.id_prod
+
+    console.log(`DELETE producto ${idProducto} en carrito ${idCarrito}`)
+
+    let carritoId = await carrito.getById(Number(idCarrito))
+    
+    if (carritoId != null) {
+        let productosCarrito = carritoId.productos
+        if (productosCarrito != []) {
+            let producto = await productos.getById(Number(idProducto))
+            if (producto != null) {
+                productosCarrito = productosCarrito.filter(prod => prod.id != idProducto)
+            }
+        }
+
+        console.log (`productosCarrito: ${productosCarrito}`)
+
+        res.json(await carrito.updateById({productos: productosCarrito}, idCarrito))
+    }
+    else {
+        res.json(errorCarrito)
+    }    
     
 })
 

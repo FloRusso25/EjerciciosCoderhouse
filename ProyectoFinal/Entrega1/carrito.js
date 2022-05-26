@@ -38,7 +38,7 @@ class Carrito extends Contenedor {
             let carrito = await this.getById(id)
             await super.deleteById(id)
 
-            if (object.productos != undefined) { carrito.productos = carrito.productos }
+            if (object.productos != []) { carrito.productos = object.productos }
             
             return await super.save(carrito, carrito.id)
         }
@@ -73,12 +73,12 @@ class Carrito extends Contenedor {
     }
 
     async updateById(object, id) {       
-        let producto = await super.getById(id)
+        let carrito = await super.getById(id)
 
-        if (producto != null) {
-            let newItemId = await this.save(object, id)
+        if (carrito != null) {
+            let newCarritoId = await this.save(object, id)
 
-            return (await super.getById(newItemId))
+            return (await super.getById(newCarritoId))
         }
         else {
             return null
