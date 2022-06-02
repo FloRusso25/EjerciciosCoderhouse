@@ -1,11 +1,19 @@
 //import clase contenedor
-const Contenedor = require("./contenedor.js")
-const productos = new Contenedor('productos') 
+const { mysqlconntection } = require('./mysql/mysql.js')
+const Contenedor = require("./general/contenedor.js")
+const productos = new Contenedor('productos', mysqlconntection)
+
+const Tabla = require("./general/crearTablas.js")
+
+const tablaProductos = new Tabla('productos')
+
+tablaProductos.insertararticulo({nombre: "escuadra", precio: 5.65, urlFoto: "www.escuadra.com"})
 
 //Carga de tres productos en memoria
-// productos.save({title: "escuadra", price: 5.65, thumbnail: "www.escuadra.com"})
-// productos.save({title: "tijera", price: 3, thumbnail: "www.tijera.com"})
-// productos.save({title: "regla", price: 2.5, thumbnail: "www.regla.com"})
+productos.save({nombre: "escuadra", precio: 5.65, urlFoto: "www.escuadra.com"})
+productos.save({nombre: "tijera", precio: 3, urlFoto: "www.tijera.com"})
+productos.save({nombre: "regla", precio: 2.5, urlFoto: "www.regla.com"})
+
 
 //import express y definiciones
 const express = require('express')
@@ -41,6 +49,11 @@ httpServer.listen(PORT, () => {
     console.log(`Servidor escuchando en puerto ${httpServer.address().port}`)
 })
 httpServer.on("error", error => console.log(`Error en servidor ${error}`))
+
+let body = ''
+tablaProductos.crearTabla('productos', body)
+
+
 
 
 //llamadas

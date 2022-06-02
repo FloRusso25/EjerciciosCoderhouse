@@ -1,11 +1,11 @@
 const fs = require('fs')
-const knex = require('knex')(mysqlconntection)
+const { mysqlconnection } = require('../mysql/mysql.js')
+const knex = require('knex')(mysqlconnection) 
 
 // Definicion de clase Contenedor
 class Contenedor {
     constructor(nombreTabla) {
         this.listaProductos = []
-        this.id = 1
         this.nombreTabla = nombreTabla
     }
 
@@ -13,34 +13,33 @@ class Contenedor {
         return knex.from(this.nombreTabla).select("*")
     }
 
-    save(object, id=null){
+    async save(object, id=null){
         if (id == null) {
-            object.id = this.id ++
-            knex(this.nombreTabla).insert(object)
-            
-            return object.id
+            await knex(this.nombreTabla).insert(object)
+                    
+            return await knex.from(this.nombreTabla).select("*").where({nombre: object.nombre}, {precio: object.precio}, {urlFoto: object.urlFoto})
         }
         else {
-            let producto = this.listaProductos.find(contenido => contenido.id == id)
-            this.deleteById(id)
-            if (object.title != undefined) { producto.title = object.title }
-            if (object.price != undefined) { producto.price = object.price }
-            if (object.thumbnail != undefined) { producto.thumbnail = object.thumbnail }
+            let producto = knex.from(this.nombreTabla).select("*").where('id','=', id)
 
-            this.listaProductos.push(producto)
+            if (object.nombre != undefined) { producto.nombre = object.nombre }
+            if (object.precio != undefined) { producto.precio = object.precio }
+            if (object.urlFoto != undefined) { producto.urlFoto = object.urlFoto }
+
+            await knex.from(this.nombreTabla).where('id', id).update(producto)
 
             return producto.id
         }
     }
 
     getById(id) {
-        let producto = this.listaProductos.filter(contenido => contenido.id == id)
+        let producto = knex.from(this.nombreTabla).select("*").where('id','=', id)
 
         return ((producto.length) ? producto : null)
     }
 
     deleteById(id) {
-        this.listaProductos = this.listaProductos.filter(contenido => contenido.id != id)
+        knex.from(this.nombreTabla).where('id', id).del()
     }
 
     updateById(object, id) {
@@ -58,7 +57,7 @@ class Contenedor {
     }
 
     deleteAll() {
-        this.listaProductos = []
+        knex.from(this.nombreTabla).del()
 
     }
 }

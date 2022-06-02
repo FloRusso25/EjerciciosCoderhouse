@@ -1,11 +1,12 @@
 //import
 const fs = require('fs')
 const Contenedor = require("./contenedor.js")
-
+const { mysqlconnection } = require('../mysql/mysql.js')
+const knex = require('knex')(mysqlconnection)
 // Definicion de clase Contenedor
 class Producto extends Contenedor {
-    constructor(nombreArchivo) {
-        super(nombreArchivo)
+    constructor(nombreTabla) {
+        super(nombreTabla)
         this.timestamp = Date.now()
     }
 
@@ -35,7 +36,6 @@ class Producto extends Contenedor {
         }
         else {
             let producto = await this.getById(id)
-            await super.deleteById(id)
 
             if (object.nombre != undefined) { producto.nombre = object.nombre }
             if (object.descripcion != undefined) { producto.descripcion = object.descripcion }
@@ -90,4 +90,4 @@ class Producto extends Contenedor {
     }
 }
 
-module.exports = Producto
+export default Producto
