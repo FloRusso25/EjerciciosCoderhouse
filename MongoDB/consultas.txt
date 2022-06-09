@@ -1,0 +1,83 @@
+Inicializar las consolas:
+  mongod --dbpath "MongoDB/ecommerce"
+  mongo
+
+Crear base de datos ecommerce:
+  use ecommerce
+
+Crear colecciones mensajes y productos:
+  db.createCollection('mensajes')
+  db.createCollection('productos')
+
+Insertar 10 documentos en mensajes: 
+  db.mensajes.insertMany( [
+    { timestamp: ISODate(), email: "usuario1@email.com", message:"Hola, soy Usuario1" },
+    { timestamp: ISODate(), email: "usuario2@email.com", message:"Hola, soy Usuario2" },
+    { timestamp: ISODate(), email: "usuario3@email.com", message:"Hola, soy Usuario3" },
+    { timestamp: ISODate(), email: "usuario4@email.com", message:"Hola, soy Usuario4" },
+    { timestamp: ISODate(), email: "usuario5@email.com", message:"Hola, soy Usuario5" },
+    { timestamp: ISODate(), email: "usuario6@email.com", message:"Hola, soy Usuario6" },
+    { timestamp: ISODate(), email: "usuario7@email.com", message:"Hola, soy Usuario7" },
+    { timestamp: ISODate(), email: "usuario8@email.com", message:"Hola, soy Usuario8" },
+    { timestamp: ISODate(), email: "usuario9@email.com", message:"Hola, soy Usuario9" },
+    { timestamp: ISODate(), email: "usuario10@email.com", message:"Hola, soy Usuario10" }
+  ] )
+
+Insertar 10 documentos en productos:
+  db.productos.insertMany([
+    { timestamp: ISODate(), nombre: "producto1", precio: 100, fotoUrl: "www.producto1.com"},
+    { timestamp: ISODate(), nombre: "producto2", precio: 500, fotoUrl: "www.producto2.com"},
+    { timestamp: ISODate(), nombre: "producto3", precio: 1000, fotoUrl: "www.producto3.com"},
+    { timestamp: ISODate(), nombre: "producto4", precio: 350, fotoUrl: "www.producto4.com"},
+    { timestamp: ISODate(), nombre: "producto5", precio: 3500, fotoUrl: "www.producto5.com"},
+    { timestamp: ISODate(), nombre: "producto6", precio: 299, fotoUrl: "www.producto6.com"},
+    { timestamp: ISODate(), nombre: "producto7", precio: 1917, fotoUrl: "www.producto7.com"},
+    { timestamp: ISODate(), nombre: "producto8", precio: 2020, fotoUrl: "www.producto8.com"},
+    { timestamp: ISODate(), nombre: "producto9", precio: 4750, fotoUrl: "www.producto9.com"},
+    { timestamp: ISODate(), nombre: "producto10", precio: 4999, fotoUrl: "www.producto10.com"},
+  ])
+
+Listar todos los documentos de cada coleccion:
+  db.mensajes.find()
+  db.productos.find()
+
+Mostrar cantidad de documentos de cada coleccion:
+  db.mensajes.count()
+  db.productos.count()
+
+Agregar un producto mas a la coleccion productos:
+  db.productos.insert({timestamp: ISODate(), nombre: "producto11", precio: 280, fotoUrl: "www.producto11.com"})
+
+Listar el nuevo producto:
+  db.productos.find({nombre: "producto11"})
+
+Listar todos los productos con precio menor a 1000
+  db.productos.find({precio: {$lt: 1000}})
+
+Listar todos los productos con precio etre 1000 y 3000
+  db.productos.find({
+    $and: [
+      {precio: {$gte: 1000}},
+      {precio: {$lte: 3000}}
+    ]}
+  )
+
+Listar productos con precio mayor a 3000
+  db.productos.find({precio: {$gt: 3000}})
+
+Buscar nombre del 3er producto mas barato: 
+  db.productos.find({}, {nombre: 1, _id: 0}).sort({"precio":1}).limit(1).skip(2)
+
+Agregar stock 0 a los productos con precio mayor a 4000
+  db.productos.updateMany(
+    {precio: {$gt: 4000}}, {$set: {stock: 0}}
+  )
+
+Borrar productos con precio menor a 1000
+  db.productos.deleteMany(
+    {precio: {$lt: 1000}}
+  )
+
+Crear usuario pepe con permisos de solo lectura
+  db.createUser({user: 'pepe', pwd: 'asd456',roles: [{role: 'read',db: 'ecommerce'}]})
+
