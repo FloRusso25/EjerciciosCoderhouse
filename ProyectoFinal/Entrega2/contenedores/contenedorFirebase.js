@@ -25,22 +25,12 @@ export default class ContenedorFB {
     async save(object, id=null){
         let ultimoId = await this.getAll()
         const query = await this.connectFirebase()
-        console.log(`QUERY: ${query}`)
-        let test = ((JSON.stringify(ultimoId) == '[]') ? "def:" : "undef:")
-        console.log(`IF defund: ${test}`)
-        console.log(`IF length: ${ultimoId.length}`)
-        console.log(`IF string: ${JSON.stringify(ultimoId)}`)
 
         if (id == null) {
-            console.log(`ULTID: ${this.id}`)
-            console.log(`ULTIlength: ${ultimoId.length}`)
             object.id = ((JSON.stringify(ultimoId) == '[]') ? this.id : Math.max(...ultimoId.map(objeto => objeto.id)))
-            console.log(`ULTIMO ID1: ${object.id}`)
             object.id++
             let nuevoObjeto = query.doc(`${object.id}`)
             await nuevoObjeto.create(object)
-
-            console.log(`ULTIMO ID: ${object.id}`)
 
             return object.id
         }
@@ -56,9 +46,6 @@ export default class ContenedorFB {
         const query = await this.connectFirebase()
         const doc = query.doc(`${id}`)
         const nuevoObjeto = await doc.get()
-
-        console.log(`CTnuevObjeto: ${JSON.stringify(nuevoObjeto)}`)
-        console.log(`CTnuevObjetoDATA: ${JSON.stringify(nuevoObjeto.data())}`)
 
         return ((nuevoObjeto.data()) ? nuevoObjeto.data(): null )
     }

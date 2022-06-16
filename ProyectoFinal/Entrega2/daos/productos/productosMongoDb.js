@@ -24,7 +24,7 @@ export default class ProductoMongoDB extends ContenedorMongoDB {
 
         try {
             console.log(`OBJECTDEF: ${JSON.stringify(object)}`)
-            return await super.save(object, this.coleccion)
+            return await super.save(object, this.coleccion, id)
         }
         catch (error) {
             console.log(`ERROR: No se pudo guardar el producto ${object}. Mensaje: ${error}`)

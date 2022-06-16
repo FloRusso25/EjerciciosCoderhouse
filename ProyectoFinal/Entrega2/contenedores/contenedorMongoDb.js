@@ -7,6 +7,7 @@ import connectionStringMDb from "../mongoDbConnection.json" assert {type: "json"
 // Definicion de clase Contenedor
 export default class ContenedorMongoDB {
     constructor() {
+        this.id = 0
     }
 
     async connectMongoose() {
@@ -26,9 +27,14 @@ export default class ContenedorMongoDB {
         return todos
     }
 
-    async save(object, coleccion, id=null){
+    async save(object, coleccion, id1=null){
+        let ultimoId = await this.getAll()
+        console.log(`VACIA: ${JSON.stringify(ultimoId)}`)
 
-        if (id == null) {
+        if (id1 == null) {
+            object.id = ((JSON.stringify(ultimoId) == '[]') ? this.id : Math.max(...ultimoId.map(objeto => objeto.id)))
+            object.id++
+            console.log(`NUEVOID: ${object.id}`)
             let modelo = ''
             if (coleccion == 'carrito') {
                 modelo = await carrito.carrito(object)
@@ -39,41 +45,47 @@ export default class ContenedorMongoDB {
             const savedObject = await modelo.save()
 
             console.log(`ID: ${JSON.stringify(savedObject)}`)
-            return savedObject.insertedId
+            console.log(`IDIDID: ${savedObject.id}`)
+
+            return savedObject.id
         }
         else {
             let productoActualizar = ''
             if (coleccion == 'carrito') {
-                productoActualizar = await carrito.carrito.findOneAndUpdate({_id: `ObjectId('${id}')`}, object)
+                productoActualizar = await carrito.carrito.findOneAndUpdate({id: id1}, object)
             }
             if (coleccion == 'producto') {
-                productoActualizar = await producto.producto.findOneAndUpdate({_id: `ObjectId('${id}')`}, object)
+                productoActualizar = await producto.producto.findOneAndUpdate({id: id1}, object)
             }
             
-            return productoActualizar.insertedId
+            return productoActualizar.id
         }
     }
 
-    async getById(id, coleccion) {
+    async getById(id1, coleccion) {
 
-        let productoId = []
         if (coleccion == 'carrito') {
-            productoId = await carrito.carrito.find({_id: `ObjectId('${id}')`})
+            console.log(`Entra?`)
+            let carritoId = []
+            carritoId = await carrito.carrito.find({id: id1})
+            console.log(`CARRITOGETID: ${carritoId}`)
+            return ((carritoId.length) ? carritoId : null)
         }
         if (coleccion == 'producto') {
-            productoId = await producto.producto.find({_id: `ObjectId('${id}')`})
+            let productoId = []
+            productoId = await producto.producto.find({id: id1})
+            console.log(`PRODUCTOGETID: ${productoId}`)
+            return ((productoId.length) ? productoId : null)
         }
-
-        return ((productoId.length) ? productoId : null)
     }
 
     async deleteById(id, coleccion) {
         let productoBorrar = ''
         if (coleccion == 'carrito') {
-            productoBorrar = await carrito.carrito.deleteOne({_id: `ObjectId('${id}')`})
+            productoBorrar = await carrito.carrito.deleteOne({id: id})
         }
         if (coleccion == 'producto') {
-            productoBorrar = await producto.producto.deleteOne({_id: `ObjectId('${id}')`})
+            productoBorrar = await producto.producto.deleteOne({id: id})
         }
     }
 

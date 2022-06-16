@@ -6,6 +6,7 @@ export default class CarritoMongoDB extends ContenedorMongoDB {
     constructor(coleccion) {
         super()
         this.coleccion = coleccion
+        this.timestamp = Date.now()
     }
 
     async getAll() {
@@ -18,8 +19,9 @@ export default class CarritoMongoDB extends ContenedorMongoDB {
     }
 
     async save(object, id=null){
+        object.timestamp = this.timestamp
         try {
-            return await super.save(object, id, this.coleccion)
+            return await super.save(object, this.coleccion, id)
         }
         catch (error) {
             console.log(`ERROR: No se pudo guardar el carrito ${object}. Mensaje: ${error}`)
@@ -28,7 +30,7 @@ export default class CarritoMongoDB extends ContenedorMongoDB {
 
     async getById(id) {
         try {
-            return await super.getById(id)
+            return await super.getById(id, this.coleccion)
         }
         catch (error){
             console.log(`ERROR: Carrito con id ${id}. Mensaje: ${error}`)
