@@ -1,0 +1,4 @@
+{
+  "connectionString": "mongodb+srv://florusso:florusso@cluster0.tnosi.mongodb.net/ecommerce?retryWrites=true&w=majority"
+}
+  
