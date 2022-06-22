@@ -1,0 +1,38 @@
+<h2>Ingrese producto</h2>
+  <form onsubmit="return addProduct(this)">
+    Nombre: <input type="text" id="nombre">
+    Precio: <input type="text" id="precio">
+    Imagen: <input type="text" id="foto">
+    <input type="submit" value="Enviar">
+  </form>
+  {{!-- <script>
+    form.addEventListener("submit",(e)=>{
+      e.preventDefault();
+    });
+  </script> --}}
+
+<br><hr>
+
+<div>
+  <h2>Producto agregado</h2>
+  <table>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Imagen</th>
+      </tr>
+      <tr id="listaProductos">
+
+      </tr>
+      <script src="/socket.io/socket.io.js"></script>    
+      <script src="tablaProductos.js"></script>
+
+  </table>
+</div>
+
+  <br><hr>
+
+{{!-- {{> listaProductos}} --}}
+
+  
+{{> centroMensajes}}
