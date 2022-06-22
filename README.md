@@ -10,6 +10,3 @@
 8) NUESTRA PRIMERA BASE DE DATOS
 9) [Mongo DB](MongoDB/README.md)
 10) [Segunda entrega del Proyecto Final](ProyectoFinal/Entrega2/README.md)
-11) Mocks y normalización
-12) LOG-IN POR FORMULARIO
-13) Inicio de sesión
