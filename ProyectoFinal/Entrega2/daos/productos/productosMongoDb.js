@@ -23,7 +23,6 @@ export default class ProductoMongoDB extends ContenedorMongoDB {
         object.timestamp = this.timestamp
 
         try {
-            console.log(`OBJECTDEF: ${JSON.stringify(object)}`)
             return await super.save(object, this.coleccion, id)
         }
         catch (error) {

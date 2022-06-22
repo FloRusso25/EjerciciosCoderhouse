@@ -29,12 +29,10 @@ export default class ContenedorMongoDB {
 
     async save(object, coleccion, id1=null){
         let ultimoId = await this.getAll()
-        console.log(`VACIA: ${JSON.stringify(ultimoId)}`)
 
         if (id1 == null) {
             object.id = ((JSON.stringify(ultimoId) == '[]') ? this.id : Math.max(...ultimoId.map(objeto => objeto.id)))
             object.id++
-            console.log(`NUEVOID: ${object.id}`)
             let modelo = ''
             if (coleccion == 'carrito') {
                 modelo = await carrito.carrito(object)
@@ -43,9 +41,6 @@ export default class ContenedorMongoDB {
                 modelo = await producto.producto(object)
             }
             const savedObject = await modelo.save()
-
-            console.log(`ID: ${JSON.stringify(savedObject)}`)
-            console.log(`IDIDID: ${savedObject.id}`)
 
             return savedObject.id
         }
@@ -65,16 +60,15 @@ export default class ContenedorMongoDB {
     async getById(id1, coleccion) {
 
         if (coleccion == 'carrito') {
-            console.log(`Entra?`)
             let carritoId = []
             carritoId = await carrito.carrito.find({id: id1})
-            console.log(`CARRITOGETID: ${carritoId}`)
+
             return ((carritoId.length) ? carritoId : null)
         }
         if (coleccion == 'producto') {
             let productoId = []
             productoId = await producto.producto.find({id: id1})
-            console.log(`PRODUCTOGETID: ${productoId}`)
+
             return ((productoId.length) ? productoId : null)
         }
     }
