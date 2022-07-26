@@ -1,0 +1,23 @@
+{
+  "name": "iniciosesion",
+  "version": "1.0.0",
+  "description": "Implementar sobre el entregable que venimos realizando un mecanismo de autenticación. Para ello:\r Se incluirá una vista de registro, en donde se pidan email y contraseña. Estos datos se persistirán usando MongoDb, en una (nueva) colección de usuarios, cuidando que la contraseña quede encriptada (sugerencia: usar la librería bcrypt).\r Una vista de login, donde se pida email y contraseña, y que realice la autenticación del lado del servidor a través de una estrategia de passport local.\r Cada una de las vistas (logueo - registro) deberá tener un botón para ser redirigido a la otra.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.4.7",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
+  }
+}
